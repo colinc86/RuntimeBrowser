@@ -16,8 +16,8 @@
 		0315BBE017E0865A00F226E6 /* tree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0315BBDF17E0865A00F226E6 /* tree@2x.png */; };
 		0315BBE217E0868900F226E6 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0315BBE117E0868900F226E6 /* search@2x.png */; };
 		0319E3B6179A86BA001F3471 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0319E3B5179A86BA001F3471 /* Defaults.plist */; };
-		033574AE1B0354F1004A3CB6 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 033574911B0354F1004A3CB6 /* GCDWebServer.m */; };
-		033574AF1B0354F1004A3CB6 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 033574931B0354F1004A3CB6 /* GCDWebServerConnection.m */; };
+		033574AE1B0354F1004A3CB6 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 033574911B0354F1004A3CB6 /* GCDWebServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		033574AF1B0354F1004A3CB6 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 033574931B0354F1004A3CB6 /* GCDWebServerConnection.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		033574B01B0354F1004A3CB6 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 033574951B0354F1004A3CB6 /* GCDWebServerFunctions.m */; };
 		033574B11B0354F1004A3CB6 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 033574991B0354F1004A3CB6 /* GCDWebServerRequest.m */; };
 		033574B21B0354F1004A3CB6 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0335749B1B0354F1004A3CB6 /* GCDWebServerResponse.m */; };

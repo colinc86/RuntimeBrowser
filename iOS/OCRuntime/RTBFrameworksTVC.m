@@ -10,7 +10,7 @@
 #import "RTBFrameworkCell.h"
 #import "RTBRuntime.h"
 #import "RTBListTVC.h"
-#import "RTBInfoVC.h"
+#import "RTBInfoTVC.h"
 
 static const NSUInteger kPublicFrameworks = 0;
 static const NSUInteger kPrivateFrameworks = 1;

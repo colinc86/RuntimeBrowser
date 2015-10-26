@@ -25,7 +25,7 @@
 - (void)updateWebServerStatus {
     RTBAppDelegate *appDelegate = (RTBAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *serverURL = [NSString stringWithFormat:@"http://%@:%d/", [appDelegate myIPAddress], [appDelegate serverPort]];
-    _webServerStatusLabel.text = [[appDelegate webServer] isRunning] ? serverURL : @"";
+    _webServerStatusLabel.text = [[appDelegate webServer] isRunning] ? serverURL : @"Inactive";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
