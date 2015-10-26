@@ -9,8 +9,7 @@
 #import "RTBProtocolCell.h"
 
 @interface RTBProtocolCell ()
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UIButton *button;
+
 @end
 
 @implementation RTBProtocolCell
@@ -20,16 +19,6 @@
     _label.text = [p protocolName];
     _label.font = [UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18];
     self.accessoryType = [p hasChildren] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-}
-
-- (IBAction)showHeaders:(id)sender {
-    // TODO: use a notification here
-	id appDelegate = [[UIApplication sharedApplication] delegate];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-	[appDelegate performSelector:@selector(showHeaderForProtocol:) withObject:_protocolObject];
-#pragma clang diagnostic pop
 }
 
 @end

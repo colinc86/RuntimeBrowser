@@ -11,6 +11,7 @@
 #import "RTBClassCell.h"
 #import "RTBClass.h"
 #import "RTBClassDisplayVC.h"
+#import "RTBAppDelegate.h"
 
 @interface RTBTreeTVC ()
 
@@ -80,16 +81,28 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
 	RTBClass *cs = [_classStubs objectAtIndex:indexPath.row];
 	
-	if([[cs subclassesStubs] count] == 0) return;
-	
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    RTBTreeTVC *tvc = (RTBTreeTVC *)[sb instantiateViewControllerWithIdentifier:@"RTBTreeTVC"];
-    tvc.isSubLevel = YES;
-	tvc.classStubs = [cs subclassesStubs];
-	tvc.title = cs.classObjectName;
-	[self.navigationController pushViewController:tvc animated:YES];
+    if([[cs subclassesStubs] count] == 0) {
+        // TODO: use a notification here
+        id appDelegate = [[UIApplication sharedApplication] delegate];
+        RTBClassCell *cell = (RTBClassCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        [appDelegate performSelector:@selector(showHeaderForClassName:) withObject:cell.label.text];
+#pragma clang diagnostic pop
+    }
+    else {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        RTBTreeTVC *tvc = (RTBTreeTVC *)[sb instantiateViewControllerWithIdentifier:@"RTBTreeTVC"];
+        tvc.isSubLevel = YES;
+        tvc.classStubs = [cs subclassesStubs];
+        tvc.title = cs.classObjectName;
+        [self.navigationController pushViewController:tvc animated:YES];
+    }
 }
 
 #pragma mark - Navigation

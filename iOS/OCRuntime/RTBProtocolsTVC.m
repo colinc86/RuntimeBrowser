@@ -121,19 +121,30 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     RTBProtocol *p = [self protocolStubAtIndexPath:indexPath];
     
     NSArray *children = [p children];
     
-    if([children count] == 0) return;
-
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    RTBListTVC *listTVC = (RTBListTVC *)[sb instantiateViewControllerWithIdentifier:@"RTBListTVC"];
-    listTVC.titleForNavigationItem = p.protocolName;
-    listTVC.classStubs = children;
-    
-    [self.navigationController pushViewController:listTVC animated:YES];
+    if([children count] == 0) {
+        // TODO: use a notification here
+        id appDelegate = [[UIApplication sharedApplication] delegate];
+        RTBProtocolCell *cell = (RTBProtocolCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        [appDelegate performSelector:@selector(showHeaderForClassName:) withObject:cell.label.text];
+#pragma clang diagnostic pop
+    }
+    else {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        RTBListTVC *listTVC = (RTBListTVC *)[sb instantiateViewControllerWithIdentifier:@"RTBListTVC"];
+        listTVC.titleForNavigationItem = p.protocolName;
+        listTVC.classStubs = children;
+        
+        [self.navigationController pushViewController:listTVC animated:YES];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

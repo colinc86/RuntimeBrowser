@@ -66,6 +66,8 @@ static const NSUInteger kPrivateFrameworks = 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     NSBundle *b = nil;
     if(indexPath.section == kPublicFrameworks) {
         b = [_publicFrameworks objectAtIndex:indexPath.row];

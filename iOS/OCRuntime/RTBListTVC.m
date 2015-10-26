@@ -166,6 +166,19 @@
     return a;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // TODO: use a notification here
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+    RTBClassCell *cell = (RTBClassCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    [appDelegate performSelector:@selector(showHeaderForClassName:) withObject:cell.label.text];
+#pragma clang diagnostic pop
+}
+
 #pragma mark UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { // called when text changes (including clear)
