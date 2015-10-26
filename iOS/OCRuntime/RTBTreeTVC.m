@@ -86,14 +86,8 @@
 	RTBClass *cs = [_classStubs objectAtIndex:indexPath.row];
 	
     if([[cs subclassesStubs] count] == 0) {
-        // TODO: use a notification here
-        id appDelegate = [[UIApplication sharedApplication] delegate];
         RTBClassCell *cell = (RTBClassCell *)[tableView cellForRowAtIndexPath:indexPath];
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-        [appDelegate performSelector:@selector(showHeaderForClassName:) withObject:cell.label.text];
-#pragma clang diagnostic pop
+        [[NSNotificationCenter defaultCenter] postNotificationName:ShowHeaderForClassNameNotification object:nil userInfo:[NSDictionary dictionaryWithObject:cell.label.text forKey:kClassName]];
     }
     else {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];

@@ -29,8 +29,12 @@
 #import <objc/message.h>
 #endif
 
-
 @implementation RTBAppDelegate
+
+NSString *const ShowHeaderForClassNameNotification = @"ShowHeaderForClassNameNotification";
+NSString *const ShowHeaderForProtocolNotification = @"ShowHeaderForProtocolNotification";
+NSString *const kClassName = @"className";
+NSString *const kProtocol = @"protocol";
 
 //- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 //{
@@ -40,8 +44,8 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ShowHeaderForClassNameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ShowHeaderForProtocolNotification object:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -57,7 +61,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHeaderClassNameNotification:) name:ShowHeaderForClassNameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHeaderProtocolNotification:) name:ShowHeaderForProtocolNotification object:nil];
 }
 
 //- (void)applicationWillTerminate:(UIApplication *)application
@@ -72,6 +77,20 @@
 //	}
 //	return _classDisplayVC;
 //}
+
+- (void)showHeaderClassNameNotification:(NSNotification *)notification {
+    NSString *className = (NSString *)[[notification userInfo] objectForKey:kClassName];
+    if (className != nil) {
+        [self showHeaderForClassName:className];
+    }
+}
+
+- (void)showHeaderProtocolNotification:(NSNotification *)notification {
+    RTBProtocol *protocol = (RTBProtocol *)[[notification userInfo] objectForKey:kProtocol];
+    if (protocol != nil) {
+        [self showHeaderForProtocol:protocol];
+    }
+}
 
 - (void)useClass:(NSString *)className {
     

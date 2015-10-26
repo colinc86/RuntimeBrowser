@@ -11,6 +11,11 @@
 
 @class RTBRuntime;
 
+extern NSString *const ShowHeaderForClassNameNotification;
+extern NSString *const ShowHeaderForProtocolNotification;
+extern NSString *const kClassName;
+extern NSString *const kProtocol;
+
 @interface RTBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

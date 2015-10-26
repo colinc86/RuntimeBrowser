@@ -10,6 +10,7 @@
 #import "RTBRuntime.h"
 #import "RTBClassCell.h"
 #import "RTBClass.h"
+#import "RTBAppDelegate.h"
 
 @interface RTBListTVC ()
 @property (nonatomic, strong) NSString *filterStringLowercase;
@@ -161,22 +162,28 @@
     
     for(NSDictionary *d in _classStubsDictionaries) {
         [a addObject:[[d allKeys] lastObject]];
+        [a addObject:@""];
     }
     
+    [a removeLastObject];
+    
     return a;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    if (index % 2 == 0) {
+        return index / 2;
+    }
+    else {
+        return -1;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // TODO: use a notification here
-    id appDelegate = [[UIApplication sharedApplication] delegate];
     RTBClassCell *cell = (RTBClassCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    [appDelegate performSelector:@selector(showHeaderForClassName:) withObject:cell.label.text];
-#pragma clang diagnostic pop
+    [[NSNotificationCenter defaultCenter] postNotificationName:ShowHeaderForClassNameNotification object:nil userInfo:[NSDictionary dictionaryWithObject:cell.label.text forKey:kClassName]];
 }
 
 #pragma mark UISearchBarDelegate

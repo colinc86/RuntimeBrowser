@@ -11,6 +11,7 @@
 #import "RTBProtocolCell.h"
 #import "RTBRuntime.h"
 #import "RTBListTVC.h"
+#import "RTBAppDelegate.h"
 
 @interface RTBProtocolsTVC ()
 @property (nonatomic, strong) NSString *filterStringLowercase;
@@ -128,14 +129,7 @@
     NSArray *children = [p children];
     
     if([children count] == 0) {
-        // TODO: use a notification here
-        id appDelegate = [[UIApplication sharedApplication] delegate];
-        RTBProtocolCell *cell = (RTBProtocolCell *)[tableView cellForRowAtIndexPath:indexPath];
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-        [appDelegate performSelector:@selector(showHeaderForClassName:) withObject:cell.label.text];
-#pragma clang diagnostic pop
+        [[NSNotificationCenter defaultCenter] postNotificationName:ShowHeaderForProtocolNotification object:nil userInfo:[NSDictionary dictionaryWithObject:p forKey:kProtocol]];
     }
     else {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
@@ -168,7 +162,24 @@
     
     [ma sortedArrayUsingSelector:@selector(compare:)];
     
-    return ma;
+    NSMutableArray *spacedArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < ma.count; i++) {
+        [spacedArray addObject:[ma objectAtIndex:i]];
+        [spacedArray addObject:@""];
+    }
+    
+    [spacedArray removeLastObject];
+    
+    return spacedArray;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    if (index % 2 == 0) {
+        return index / 2;
+    }
+    else {
+        return -1;
+    }
 }
 
 /*
