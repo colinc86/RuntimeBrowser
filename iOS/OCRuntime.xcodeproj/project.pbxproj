@@ -39,7 +39,6 @@
 		037402E917968502005D1AFB /* RTBClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 037402E817968502005D1AFB /* RTBClassCell.m */; };
 		037402EC1796855F005D1AFB /* RTBClassDisplayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 037402EB1796855F005D1AFB /* RTBClassDisplayVC.m */; };
 		037402EF17968588005D1AFB /* RTBObjectsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 037402EE17968588005D1AFB /* RTBObjectsTVC.m */; };
-		037402F217968FCB005D1AFB /* RTBInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 037402F117968FCB005D1AFB /* RTBInfoVC.m */; };
 		037402FF17969143005D1AFB /* RTBMethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 037402FE17969143005D1AFB /* RTBMethodCell.m */; };
 		03740344179694CE005D1AFB /* RTBMyIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 03740343179694CE005D1AFB /* RTBMyIP.m */; };
 		0374034D17969813005D1AFB /* RTBListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0374034A17969813005D1AFB /* RTBListTVC.m */; };
@@ -68,6 +67,7 @@
 		03F2FED0179C5B0A00D2DDF8 /* Keywords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03F2FECE179C5B0A00D2DDF8 /* Keywords.plist */; };
 		03FA8B771AEE3D2500D55C16 /* RTBProtocolsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA8B761AEE3D2500D55C16 /* RTBProtocolsTVC.m */; };
 		4CE3702117E375DD00CD4BF2 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE3702017E375DD00CD4BF2 /* UIAlertView+Blocks.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		55E908F01BDE33B700CB937A /* RTBInfoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E908EF1BDE33B700CB937A /* RTBInfoTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,8 +139,6 @@
 		037402EB1796855F005D1AFB /* RTBClassDisplayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBClassDisplayVC.m; sourceTree = "<group>"; };
 		037402ED17968588005D1AFB /* RTBObjectsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBObjectsTVC.h; sourceTree = "<group>"; };
 		037402EE17968588005D1AFB /* RTBObjectsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBObjectsTVC.m; sourceTree = "<group>"; };
-		037402F017968FCB005D1AFB /* RTBInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBInfoVC.h; sourceTree = "<group>"; };
-		037402F117968FCB005D1AFB /* RTBInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBInfoVC.m; sourceTree = "<group>"; };
 		037402FD17969143005D1AFB /* RTBMethodCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBMethodCell.h; sourceTree = "<group>"; };
 		037402FE17969143005D1AFB /* RTBMethodCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBMethodCell.m; sourceTree = "<group>"; };
 		03740342179694CE005D1AFB /* RTBMyIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBMyIP.h; sourceTree = "<group>"; };
@@ -186,6 +184,8 @@
 		03FA8B761AEE3D2500D55C16 /* RTBProtocolsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBProtocolsTVC.m; sourceTree = "<group>"; };
 		4CE3701F17E375DD00CD4BF2 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		4CE3702017E375DD00CD4BF2 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		55E908EE1BDE33B700CB937A /* RTBInfoTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBInfoTVC.h; sourceTree = "<group>"; };
+		55E908EF1BDE33B700CB937A /* RTBInfoTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBInfoTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,8 +379,8 @@
 				037402EB1796855F005D1AFB /* RTBClassDisplayVC.m */,
 				037402ED17968588005D1AFB /* RTBObjectsTVC.h */,
 				037402EE17968588005D1AFB /* RTBObjectsTVC.m */,
-				037402F017968FCB005D1AFB /* RTBInfoVC.h */,
-				037402F117968FCB005D1AFB /* RTBInfoVC.m */,
+				55E908EE1BDE33B700CB937A /* RTBInfoTVC.h */,
+				55E908EF1BDE33B700CB937A /* RTBInfoTVC.m */,
 				0360F4FC17969BBE00F58672 /* RTBSearchVC.h */,
 				0360F4FD17969BBE00F58672 /* RTBSearchVC.m */,
 				0360F50717969FDA00F58672 /* header.png */,
@@ -469,7 +469,7 @@
 				ORGANIZATIONNAME = "Nicolas Seriot";
 				TargetAttributes = {
 					03959DCD176AFC4D002A1FCC = {
-						DevelopmentTeam = 36C3524M7W;
+						DevelopmentTeam = 4WS4246RA4;
 					};
 					03959DF1176AFC4E002A1FCC = {
 						TestTargetID = 03959DCD176AFC4D002A1FCC;
@@ -535,7 +535,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03740344179694CE005D1AFB /* RTBMyIP.m in Sources */,
-				037402F217968FCB005D1AFB /* RTBInfoVC.m in Sources */,
 				0360F4FE17969BBE00F58672 /* RTBSearchVC.m in Sources */,
 				033574B21B0354F1004A3CB6 /* GCDWebServerResponse.m in Sources */,
 				033574B81B0354F1004A3CB6 /* GCDWebServerErrorResponse.m in Sources */,
@@ -550,6 +549,7 @@
 				0308D7401AFA3BB2000CEC87 /* RTBMethod.m in Sources */,
 				033574B41B0354F1004A3CB6 /* GCDWebServerFileRequest.m in Sources */,
 				033574B51B0354F1004A3CB6 /* GCDWebServerMultiPartFormRequest.m in Sources */,
+				55E908F01BDE33B700CB937A /* RTBInfoTVC.m in Sources */,
 				033574B71B0354F1004A3CB6 /* GCDWebServerDataResponse.m in Sources */,
 				039CD1CD1AE8F94C001922CB /* RTBTypeDecoder.m in Sources */,
 				033574B31B0354F1004A3CB6 /* GCDWebServerDataRequest.m in Sources */,
