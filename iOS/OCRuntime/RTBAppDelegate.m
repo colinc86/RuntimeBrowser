@@ -93,7 +93,6 @@ NSString *const kProtocol = @"protocol";
 }
 
 - (void)useClass:(NSString *)className {
-    
     RTBObjectsTVC *objectsTVC = [[RTBObjectsTVC alloc] initWithStyle:UITableViewStylePlain];
     Class klass = NSClassFromString(className);
     [objectsTVC setInspectedObject:klass];

@@ -13,6 +13,7 @@
 #import "RTBMethod.h"
 #import "RTBRuntime.h"
 #import "RTBClass.h"
+#import <objc/runtime.h>
 
 @interface RTBObjectsTVC ()
 
@@ -37,18 +38,17 @@
 }
 
 - (void)setInspectedObject:(id)o {
-    
     self.object = o;
-
+    
     self.methodsSections = [NSMutableArray array];
-
+    
     if(_object == nil) {
         [self.tableView reloadData];
         return;
     }
-
+    
     BOOL objectIsAClass = _object == [_object class];
-
+    
     Class c = [_object class];
     
     do {
@@ -78,13 +78,20 @@
     }
     
     // (sometimes fails to get the description)
-    self.title = [_object description];
-    
-    [self setInspectedObject:_object];
+    Class c = [_object class];
+    while(c) {
+        if(c == [NSObject class]) {
+            self.title = [_object description];
+            break;
+        }
+        
+        c = class_getSuperclass(c);
+    }
     
     //Class metaCls = object->isa;
     //self.methods = [object rb_classMethods];
 }
+
 /*
  - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -162,7 +169,7 @@
             if (idx <= 1) return; // skip id and SEL
 
             // eg. "(unsigned long)arg1"
-            NSString *s = [NSString stringWithFormat:@"(%@)arg%d", argType, idx-1];
+            NSString *s = [NSString stringWithFormat:@"(%@)arg%lu", argType, idx-1];
             [params addObject:s];
         }];
         
@@ -510,7 +517,7 @@
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"int"].location != NSNotFound) {
                     // int
-                    int obj = [[parameters objectAtIndex:x] integerValue];
+                    int obj = [[parameters objectAtIndex:x] intValue];
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"id"].location != NSNotFound) {
                     // id
@@ -568,7 +575,7 @@
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"int"].location != NSNotFound) {
                     // int
-                    int obj = [[parameters objectAtIndex:x] integerValue];
+                    int obj = [[parameters objectAtIndex:x] intValue];
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"id"].location != NSNotFound) {
                     // id
@@ -614,7 +621,7 @@
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"int"].location != NSNotFound) {
                     // int
-                    int obj = [[parameters objectAtIndex:x] integerValue];
+                    int obj = [[parameters objectAtIndex:x] intValue];
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"id"].location != NSNotFound) {
                     // id
@@ -666,7 +673,7 @@
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"int"].location != NSNotFound) {
                     // int
-                    int obj = [[parameters objectAtIndex:x] integerValue];
+                    int obj = [[parameters objectAtIndex:x] intValue];
                     [inv setArgument:&obj atIndex:(x + 2)];
                 } else if ([[removing objectAtIndex:x] rangeOfString:@"id"].location != NSNotFound) {
                     // id

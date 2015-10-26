@@ -22,9 +22,7 @@
 @implementation RTBClassDisplayVC
 
 - (void)use:(id)sender {
-
 	[self dismissViewControllerAnimated:YES completion:^{
-        
         RTBAppDelegate *appDelegate = (RTBAppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate useClass:self.className];
     }];

@@ -243,7 +243,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Wh8-ma-Zsv">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="O0P-b8-9Ro">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="O0P-b8-9Ro">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JCH-oW-mOs">
                                 <rect key="frame" x="20" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

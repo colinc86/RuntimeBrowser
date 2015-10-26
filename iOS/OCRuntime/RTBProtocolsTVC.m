@@ -44,7 +44,7 @@
 
 - (void)setupIndexedClassStubs {
 
-    self.navigationItem.title = [NSString stringWithFormat:@"All Protocols (%d)", [self.protocolStubs count]];
+    self.navigationItem.title = [NSString stringWithFormat:@"All Protocols (%lu)", (unsigned long)[self.protocolStubs count]];
 
     NSMutableArray *ma = [[NSMutableArray alloc] init];
     
