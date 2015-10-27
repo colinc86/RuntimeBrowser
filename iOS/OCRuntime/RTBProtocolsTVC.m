@@ -232,7 +232,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText { // called when text changes (including clear)
     
     if([searchText length] > 0) {
-        self.filterStringLowercase = searchText;
+        self.filterStringLowercase = searchText.lowercaseString;
     } else {
         self.filterStringLowercase = nil;
         

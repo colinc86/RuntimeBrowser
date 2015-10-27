@@ -44,7 +44,7 @@ static NSArray *cachedKeywords = nil;
         cachedKeywords = keywords;
     }
     
-    NSString *s = [method headerDescriptionWithNewlineAfterArgs:NO];
+    NSString *s = [method headerDescriptionWithNewlineAfterArgs:self.shouldLineBreak];
     
     NSAttributedString *as = [s colorizeWithKeywords:cachedKeywords classes:nil colorize:YES];
     

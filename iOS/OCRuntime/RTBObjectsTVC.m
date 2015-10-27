@@ -13,9 +13,15 @@
 #import "RTBMethod.h"
 #import "RTBRuntime.h"
 #import "RTBClass.h"
+#import "NSString+SyntaxColoring.h"
 #import <objc/runtime.h>
 
 @interface RTBObjectsTVC ()
+
+@property (nonatomic, retain) UIBarButtonItem *lineBreakItem;
+@property (nonatomic, retain) UIBarButtonItem *noLineBreakItem;
+
+@property (nonatomic, assign) BOOL shouldLineBreak;
 
 @property (nonatomic, strong) NSMutableArray *methodsSections; // [ { 'ClassName':'xxx', 'Methods':[a,b,c,...] }, { 'ClassName':'ParentClass', 'Methods':[a,x,y] } ]
 @property (nonatomic, strong) NSMutableArray *paramsToAdd;
@@ -27,8 +33,28 @@
 @implementation RTBObjectsTVC
 
 - (void)viewDidLoad {
+    self.lineBreakItem = [[UIBarButtonItem alloc] initWithTitle:@"Linebreaks" style:UIBarButtonItemStyleBordered target:self action:@selector(lineBreak:)];
+    self.noLineBreakItem = [[UIBarButtonItem alloc] initWithTitle:@"No Linebreaks" style:UIBarButtonItemStyleBordered target:self action:@selector(noLineBreak:)];
+    
+    self.navigationItem.leftBarButtonItem = self.lineBreakItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close:)];
     [super viewDidLoad];
+}
+
+- (void)lineBreak:(id)sender {
+    [self.navigationItem setLeftBarButtonItem:self.noLineBreakItem animated:YES];
+    self.shouldLineBreak = YES;
+    
+    NSUInteger count = [_methodsSections count];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, count)] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)noLineBreak:(id)sender {
+    [self.navigationItem setLeftBarButtonItem:self.lineBreakItem animated:YES];
+    self.shouldLineBreak = NO;
+    
+    NSUInteger count = [_methodsSections count];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, count)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (IBAction)close:(id)sender {
@@ -81,8 +107,10 @@
     Class c = [_object class];
     while(c) {
         if(c == [NSObject class]) {
-            self.title = [_object description];
-            break;
+            if ([_object respondsToSelector:@selector(description)]) {
+                self.title = [_object description];
+                break;
+            }
         }
         
         c = class_getSuperclass(c);
@@ -107,6 +135,29 @@
  */
 
 #pragma mark Table view methods
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *d = _methodsSections[indexPath.section];
+    NSArray *methods = d[@"Methods"];
+    RTBMethod *m = methods[indexPath.row];
+    
+    NSString *keywordsPath = [[NSBundle mainBundle] pathForResource:@"Keywords" ofType:@"plist"];
+    NSArray *keywords = [NSArray arrayWithContentsOfFile:keywordsPath];
+    
+    NSString *s = [m headerDescriptionWithNewlineAfterArgs:self.shouldLineBreak];
+    NSAttributedString *as = [s colorizeWithKeywords:keywords classes:nil colorize:YES];
+    
+    UILabel *dummyLabel = [[UILabel alloc] init];
+    dummyLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    dummyLabel.numberOfLines = 0;
+    dummyLabel.attributedText = as;
+    
+    BOOL hasArguments = [m hasArguments];
+    CGFloat width = hasArguments ? 66.0f : 47.0f;
+    CGSize size = [dummyLabel sizeThatFits:CGSizeMake(self.tableView.bounds.size.width - width, CGFLOAT_MAX)];
+    
+    return size.height + 16.0f > 44.0f ? size.height + 16.0f : 44.0f;
+}
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     NSMutableArray *ma = [NSMutableArray array];
@@ -145,7 +196,9 @@
     NSArray *methods = d[@"Methods"];
     RTBMethod *m = methods[indexPath.row];
     
+    cell.shouldLineBreak = self.shouldLineBreak;
     cell.method = m;
+    
     return cell;
 }
 

@@ -15,4 +15,6 @@
 
 @property (nonatomic, strong) RTBMethod *method;
 
+@property (nonatomic, assign) BOOL shouldLineBreak;
+
 @end
