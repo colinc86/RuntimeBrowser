@@ -22,6 +22,8 @@
 @implementation RTBClassDisplayVC
 
 - (void)use:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:ShowActivityViewNotification object:nil];
+    
 	[self dismissViewControllerAnimated:YES completion:^{
         RTBAppDelegate *appDelegate = (RTBAppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate useClass:self.className];
@@ -34,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ShowActivityViewNotification object:nil];
     
 	self.textView.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
     
@@ -48,11 +52,9 @@
 	self.textView.text = @"";
     self.title = _className ? _className : _protocolName;
 	
-//	// FIXME: ??
-//	NSArray *forbiddenClasses = [NSArray arrayWithObjects:@"NSMessageBuilder", /*, @"NSObject", @"NSProxy", */@"Object", @"_NSZombie_", nil];
-//	
-//	self.useButton.enabled = ![forbiddenClasses containsObject:self.className];
-    self.useButton.enabled = YES;
+	NSArray *forbiddenClasses = [NSArray arrayWithObjects:@"JSExport", @"_NSZombie_", @"__NSAtom", @"__NSGenericDeallocHandler", @"__NSMessageBuilder", nil];
+	
+	self.useButton.enabled = ![forbiddenClasses containsObject:self.className];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -81,6 +83,8 @@
     NSAttributedString *as = [header colorizeWithKeywords:keywords classes:nil colorize:YES];
     
     self.textView.attributedText = as;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:HideActivityViewNotification object:nil];
 }
 
 @end

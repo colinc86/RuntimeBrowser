@@ -10,7 +10,7 @@
 
 @class RTBRuntime;
 
-@interface RTBFrameworksTVC : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RTBFrameworksTVC : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSArray *publicFrameworks;
 @property (strong, nonatomic) NSArray *privateFrameworks;

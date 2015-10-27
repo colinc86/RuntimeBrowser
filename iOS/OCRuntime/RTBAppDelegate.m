@@ -31,6 +31,8 @@
 
 @implementation RTBAppDelegate
 
+NSString *const ShowActivityViewNotification = @"ShowActivityViewNotification";
+NSString *const HideActivityViewNotification = @"HideActivityViewNotification";
 NSString *const ShowHeaderForClassNameNotification = @"ShowHeaderForClassNameNotification";
 NSString *const ShowHeaderForProtocolNotification = @"ShowHeaderForProtocolNotification";
 NSString *const kClassName = @"className";
@@ -46,6 +48,8 @@ NSString *const kProtocol = @"protocol";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ShowHeaderForClassNameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ShowHeaderForProtocolNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ShowActivityViewNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:HideActivityViewNotification object:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -63,6 +67,13 @@ NSString *const kProtocol = @"protocol";
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHeaderClassNameNotification:) name:ShowHeaderForClassNameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showHeaderProtocolNotification:) name:ShowHeaderForProtocolNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showActivityView:) name:ShowActivityViewNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideActivityView:) name:HideActivityViewNotification object:nil];
+    
+    self.loadingView = [[RTBActivityView alloc] init];
+    self.loadingView.hidden = true;
+    self.loadingView.center = CGPointMake(self.window.bounds.size.width / 2.0f, self.window.bounds.size.height / 2.0f);
+    [self.window addSubview:self.loadingView];
 }
 
 //- (void)applicationWillTerminate:(UIApplication *)application
@@ -92,6 +103,16 @@ NSString *const kProtocol = @"protocol";
     }
 }
 
+- (void)showActivityView:(id)sender {
+    [self.loadingView.indicatorView startAnimating];
+    self.loadingView.alpha = 0.8f;
+    self.loadingView.hidden = NO;
+}
+
+- (void)hideActivityView:(id)sender {
+    self.loadingView.hidden = YES;
+}
+
 - (void)useClass:(NSString *)className {
     RTBObjectsTVC *objectsTVC = [[RTBObjectsTVC alloc] initWithStyle:UITableViewStylePlain];
     Class klass = NSClassFromString(className);
@@ -101,7 +122,7 @@ NSString *const kProtocol = @"protocol";
     
     UITabBarController *tabBarController = (UITabBarController *)_window.rootViewController;
     [tabBarController presentViewController:objectsNC animated:YES completion:^{
-        //
+        [self hideActivityView:nil];
     }];
 }
 

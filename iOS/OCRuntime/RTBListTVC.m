@@ -93,13 +93,8 @@
     }
     
     [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
     
     [self setupIndexedClassStubs];
-    
-    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,7 +162,7 @@
     
     [a removeLastObject];
     
-    return a;
+    return a.count > 1 ? a : nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {

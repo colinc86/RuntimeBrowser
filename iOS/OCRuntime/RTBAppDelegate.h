@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "GCDWebServer.h"
+#import "RTBActivityView.h"
 
 @class RTBRuntime;
 
+extern NSString *const ShowActivityViewNotification;
+extern NSString *const HideActivityViewNotification;
 extern NSString *const ShowHeaderForClassNameNotification;
 extern NSString *const ShowHeaderForProtocolNotification;
 extern NSString *const kClassName;
@@ -19,6 +22,7 @@ extern NSString *const kProtocol;
 @interface RTBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain) RTBActivityView *loadingView;
 
 @property (strong, nonatomic) RTBRuntime *allClasses;
 @property (strong, nonatomic) GCDWebServer *webServer;

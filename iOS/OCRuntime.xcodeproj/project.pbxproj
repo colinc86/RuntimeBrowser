@@ -67,6 +67,7 @@
 		03F2FED0179C5B0A00D2DDF8 /* Keywords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03F2FECE179C5B0A00D2DDF8 /* Keywords.plist */; };
 		03FA8B771AEE3D2500D55C16 /* RTBProtocolsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA8B761AEE3D2500D55C16 /* RTBProtocolsTVC.m */; };
 		4CE3702117E375DD00CD4BF2 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE3702017E375DD00CD4BF2 /* UIAlertView+Blocks.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		558409C71BDF66A8008FF2DC /* RTBActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558409C61BDF66A8008FF2DC /* RTBActivityView.m */; };
 		55E908F01BDE33B700CB937A /* RTBInfoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E908EF1BDE33B700CB937A /* RTBInfoTVC.m */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,8 @@
 		03FA8B761AEE3D2500D55C16 /* RTBProtocolsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBProtocolsTVC.m; sourceTree = "<group>"; };
 		4CE3701F17E375DD00CD4BF2 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		4CE3702017E375DD00CD4BF2 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		558409C51BDF66A8008FF2DC /* RTBActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBActivityView.h; sourceTree = "<group>"; };
+		558409C61BDF66A8008FF2DC /* RTBActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBActivityView.m; sourceTree = "<group>"; };
 		55E908EE1BDE33B700CB937A /* RTBInfoTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBInfoTVC.h; sourceTree = "<group>"; };
 		55E908EF1BDE33B700CB937A /* RTBInfoTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBInfoTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -367,6 +370,8 @@
 				0374034C17969813005D1AFB /* RTBFrameworksTVC.m */,
 				03FA8B751AEE3D2500D55C16 /* RTBProtocolsTVC.h */,
 				03FA8B761AEE3D2500D55C16 /* RTBProtocolsTVC.m */,
+				558409C51BDF66A8008FF2DC /* RTBActivityView.h */,
+				558409C61BDF66A8008FF2DC /* RTBActivityView.m */,
 				037402E717968502005D1AFB /* RTBClassCell.h */,
 				037402E817968502005D1AFB /* RTBClassCell.m */,
 				036C40341AF25A8E00477DE1 /* RTBProtocolCell.h */,
@@ -558,6 +563,7 @@
 				0374034E17969813005D1AFB /* RTBFrameworksTVC.m in Sources */,
 				03740351179698CC005D1AFB /* RTBFrameworkCell.m in Sources */,
 				0379BB83179D0BCB00F4B8BF /* NSMutableAttributedString+RTB.m in Sources */,
+				558409C71BDF66A8008FF2DC /* RTBActivityView.m in Sources */,
 				037402EF17968588005D1AFB /* RTBObjectsTVC.m in Sources */,
 				03B0E3681AED353900A9DAC3 /* RTBProtocol.m in Sources */,
 				037402FF17969143005D1AFB /* RTBMethodCell.m in Sources */,

@@ -105,15 +105,23 @@
     
     // (sometimes fails to get the description)
     Class c = [_object class];
+    BOOL didSetTitle = false;
+    
     while(c) {
         if(c == [NSObject class]) {
             if ([_object respondsToSelector:@selector(description)]) {
                 self.title = [_object description];
+                didSetTitle = true;
                 break;
             }
         }
         
         c = class_getSuperclass(c);
+    }
+    
+    if (!didSetTitle) {
+        RTBClass *classObject = [[RTBRuntime sharedInstance] classStubForClassName:NSStringFromClass(c)];
+        self.title = classObject.classObjectName;
     }
     
     //Class metaCls = object->isa;
@@ -164,8 +172,21 @@
     
     for(int i = 0; i < [_methodsSections count]; i++) {
         [ma addObject:[NSString stringWithFormat:@"%d", i]];
+        [ma addObject:@""];
     }
-    return ma;
+    
+    [ma removeLastObject];
+    
+    return ma.count > 1 ? ma : nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    if (index % 2 == 0) {
+        return index / 2;
+    }
+    else {
+        return -1;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

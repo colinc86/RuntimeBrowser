@@ -15,6 +15,10 @@
 static const NSUInteger kPublicFrameworks = 0;
 static const NSUInteger kPrivateFrameworks = 1;
 
+@interface UIAlertView ()
+- (id)buttonAtIndex:(int)arg1;
+@end
+
 @implementation RTBFrameworksTVC
 
 //- (IBAction)showInfo:(id)sender {
@@ -91,6 +95,7 @@ static const NSUInteger kPrivateFrameworks = 1;
                                                             message:alertMessage
                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
+            
             return;
         }
         
